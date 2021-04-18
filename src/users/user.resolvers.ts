@@ -1,8 +1,8 @@
-import client from "../client";
+import {Resolvers} from "../types";
 
-export default {
+const resolvers: Resolvers = {
 	User: {
-		totalFollowing: async ({id}) => {   // 없을때 참고한다
+		totalFollowing: async ({id},_,{client}) => {   // 없을때 참고한다
 			return client.user.count({
 				where: {
 					followers: {
@@ -13,7 +13,7 @@ export default {
 				}
 			})
 		},
-		totalFollowers: async ({id}) => {
+		totalFollowers: async ({id},_,{client}) => {
 			return client.user.count({
 				where: {
 					following: {
@@ -27,7 +27,7 @@ export default {
 		isMe: ({id}, _, {loggedInUser}) => {
 			return loggedInUser && loggedInUser.id === id
 		},
-		isFollowing: async ({id}, _, {loggedInUser}) => {
+		isFollowing: async ({id}, _, {loggedInUser, client}) => {
 			if (!loggedInUser){
 				return false
 			}
@@ -40,6 +40,6 @@ export default {
 			return  exists.length !== 0
 		}
 	}
-	
-	
 }
+
+export default resolvers;

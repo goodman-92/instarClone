@@ -1,11 +1,10 @@
-import client from "../../client";
 import {protectResolver} from "../users.utils";
+import {Resolvers} from "../../types";
 
-export default {
+const resolvers: Resolvers = {
 	Query: {
-		seeProfile: protectResolver(async (_, {username}) => {
-			console.log('hello Query')
-			
+		seeProfile: protectResolver(async (_, {username}, {client}) => {
+
 			const user = await client.user.findUnique({
 				where: {
 					username
@@ -22,3 +21,5 @@ export default {
 
 	}
 }
+
+export default resolvers
