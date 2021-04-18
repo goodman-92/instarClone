@@ -19,6 +19,7 @@ export const getUser = async (token) => {
 }
 // 1. 함수를 선언하자마자 실행된다, 그 다음 client(browser) 가 실행시키지 않는 이상 실행되지 않는다
 export const protectResolver = (ourResolver) => (root,args, context, info ) => {
+	
 	if (!context.loggedInUser) {
 		return {
 			ok: false,

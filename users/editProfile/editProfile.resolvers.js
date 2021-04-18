@@ -16,19 +16,25 @@ export default {
 				avatar
 			} = args
 			
-			const { filename, createReadStream } = await avatar;
-			const readStream = createReadStream();
-			const writeStream = createWriteStream(`${process.cwd()}/uploads/${filename}`)
-			readStream.pipe(writeStream);
+			let avatarUrl = null;
+			if (avatar){
+				const { filename, createReadStream } = await avatar;
+				const readStream = createReadStream();
+				const newFileName  = `${loggedInUser.id}-${Date.now()}-${filename}`
+				const writeStream = createWriteStream(`${process.cwd()}/uploads/${newFileName}`);
+				readStream.pipe(writeStream);
+				avatarUrl = `http://localhost:4000/static/${newFileName}`
+			}
 			
-			const password = newPassword ? await bcrypt.hash(newPassword, 10) : undefined;
-			// ...(password && { password }
+			const  uglyPassword = newPassword ? await bcrypt.hash(newPassword, 10) : null;
 			
 			const updateUser = await client.user.update({
 				where: {
 					id: loggedInUser.id,
 				}, data: {
-					firstName, lastName, username, email, password, bio  // undefined 알아서 체크함
+					firstName, lastName, username, email, bio,  // undefined 알아서 체크함
+					...(uglyPassword && { password: uglyPassword }),
+					...(avatarUrl && { avatar: avatarUrl})
 				}
 			})
 			
