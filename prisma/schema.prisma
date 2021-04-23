@@ -6,7 +6,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-generator client {
+generator client {                                           
   provider = "prisma-client-js"
 }
 
@@ -33,14 +33,14 @@ model Photo {
     file String
     caption String?
     hashtags HashTag[]
-    craetedAt DateTime @default(now())
+    createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 }
 
 model HashTag {
    id Int @id @default(autoincrement())
-   hashtag String
+   hashtag String @unique
    photos Photo[]
-   craetedAt DateTime @default(now())
+   createdAt DateTime @default(now())
    updatedAt DateTime @updatedAt
 }

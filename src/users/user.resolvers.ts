@@ -38,6 +38,13 @@ const resolvers: Resolvers = {
 				});
 			
 			return  exists.length !== 0
+		},
+		photos: async ({id}, {page}, context) => {
+			return context.client.user.findUnique({
+				where: {
+					id
+				}
+			}).photos()
 		}
 	}
 }
