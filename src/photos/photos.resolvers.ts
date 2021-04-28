@@ -24,7 +24,10 @@ const resolvers: Resolvers = {
 					}
 				}
 			})
-		}
+		},
+		comments: ({id}, _, {client}) => client.comment.count({where: {photoId: id}}),
+		likes: ({id}, _, {client}) => client.like.count({where: {photoId: id}}),
+		isMine: ({userId}, _, {client, loggedInUser }) => userId === loggedInUser?.id
 	},
 	HashTag: {
 		photos: async ({id}, {page}, {client}) => {

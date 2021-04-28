@@ -19,14 +19,16 @@ Instar clone Backend
 
 ## Photos
 
-- [ ] Upload Photo (Parse #)
-- [ ] See Hashtags
-- [ ] Like / unLike Photo
-- [ ] See Photo
-- [ ] Edit Photo
-- [ ] See Photo Likes
-- [ ] See Feed
-- [ ] Search Photos
+- [x] See Hashtags
+- [x] See Photo
+- [x] Search Photos
+- [x] Edit Photo
+- [x] Like / unLike Photo
+- [x] See Photo Likes
+- [x] See Feed
+- [x] See Comment
+- [x] Upload Photo (Parse #)
+- [ ] IS Mine (Delete Photo)
 
 ## Comments
 - [ ] Comment on Photo

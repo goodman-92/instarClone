@@ -30,8 +30,7 @@ const resolvers: Resolvers = {
 			const newHashtags = caption ? processHashtags(caption) : [];
 			// const disconnectedHashTags = photo.hashtags.length ? photo.hashtags.map(h => )  null;
 
-			// if (photo.userId !== context.loggedInUser.id){ return { ok: false, error: 'user file not found' } }
-
+			if (photo.userId !== context.loggedInUser.id){ return { ok: false, error: 'not auth' } }
 
 			// 바로 가면 안되고, 사진의 소유주를 확인해야하니 셀렉트를 해야지
 			const result = await context.client.photo.update({
